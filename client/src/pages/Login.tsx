@@ -80,7 +80,7 @@ export function Login() {
                   key={d.email}
                   type="button"
                   className="btn btn-outline"
-                  style={{ flexDirection: 'column', alignItems: 'flex-start', height: 'auto', padding: '10px 12px', whiteSpace: 'normal', textAlign: 'left', gap: 2, background: 'var(--paper)' }}
+                  style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', height: 'auto', padding: '10px 12px', whiteSpace: 'normal', textAlign: 'left', gap: 2, background: 'var(--paper)' }}
                   onClick={() => {
                     setEmail(d.email);
                     setPassword(DEMO_PASSWORD);

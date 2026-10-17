@@ -1,7 +1,7 @@
 import { generateKeyPairSync } from 'node:crypto';
 
 const env = process.env;
-export const isProd = env.NODE_ENV === 'production';
+export const isProd = env.NODE_ENV === 'production' || env.VERCEL === '1';
 export const isTest = env.NODE_ENV === 'test' || !!env.VITEST;
 
 function required(name: string, devFallback: () => string): string {
