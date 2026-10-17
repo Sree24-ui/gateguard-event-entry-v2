@@ -303,8 +303,8 @@ dialog.dialog::backdrop { background: rgba(13, 15, 12, 0.4); backdrop-filter: bl
 .ticket-head { background: var(--obsidian); color: var(--paper); padding: var(--s5) var(--s6); }
 .ticket-perf { position: relative; height: 0; border-top: 2px dashed var(--line-strong); margin: 0 var(--s5); }
 .ticket-perf::before, .ticket-perf::after { content: ''; position: absolute; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: var(--canvas); border: 1px solid var(--line); }
-.ticket-perf::before { left: -38px; }
-.ticket-perf::after { right: -38px; }
+.ticket-perf::before { left: -33px; }
+.ticket-perf::after { right: -33px; }
 .ticket-qr { padding: var(--s6); display: grid; place-items: center; gap: var(--s3); }
 .ticket-qr canvas, .ticket-qr img { width: min(100%, 260px) !important; height: auto !important; image-rendering: pixelated; }
 .ticket-body { padding: var(--s5) var(--s6) var(--s6); display: grid; gap: var(--s4); }

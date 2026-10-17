@@ -1,0 +1,6 @@
+node_modules
+.env
+.env.*
+!.env.example
+client/e2e/.fixtures
+client/test-results

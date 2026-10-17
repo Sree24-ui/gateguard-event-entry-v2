@@ -29,6 +29,7 @@ export default defineConfig({
       workbox: {
         // App shell + scanner wasm are precached; API responses are never cached by the service worker.
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,wasm}'],
+        globIgnores: ['screens/**'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//],

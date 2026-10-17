@@ -9,7 +9,7 @@
     "client"
   ],
   "engines": {
-    "node": ">=22"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "npm run dev -w server & npm run dev -w client",
