@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.log
+.env
+.env.*
+!.env.example
+.vercel
+.DS_Store
+playwright-report/
+test-results/
+client/e2e/.fixtures/
+*.tsbuildinfo
