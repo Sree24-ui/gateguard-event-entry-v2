@@ -193,8 +193,11 @@ describe('gate check-in', () => {
 
   it('flags conflicting offline scans during reconciliation', async () => {
     const t = await register(event.slug, 'offline@test.edu');
-    const gateA = await scan(operator, event.id, t.qr, { offline: true, gate: 'Main gate' });
-    const gateB = await scan(operator, event.id, t.qr, { offline: true, gate: 'East gate' });
+    const gateA = await scan(operator, event.id, t.qr, { offline: true, provisional: true, gate: 'Main gate' });
+    const gateB = await scan(operator, event.id, t.qr, { offline: true, provisional: true, gate: 'East gate' });
+    // An offline scan the device itself rejected is recorded but is not a conflict
+    const gateC = await scan(operator, event.id, t.qr, { offline: true, provisional: false, gate: 'East gate' });
+    expect(gateC.body).toMatchObject({ result: 'duplicate', conflict: false });
     expect(gateA.body).toMatchObject({ result: 'accepted', conflict: false });
     expect(gateB.body).toMatchObject({ result: 'duplicate', conflict: true });
     const stats = (await operator.get(`/api/events/${event.id}/stats`)).body;

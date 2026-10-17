@@ -40,7 +40,11 @@ authRouter.post('/auth/logout', (_req, res) => {
   res.json({ ok: true });
 });
 
-authRouter.get('/auth/me', requireAuth, (req, res) => {
+// Signed-out is a normal state for this endpoint, so it answers 200 with user: null rather than 401.
+authRouter.get('/auth/me', (req, res, next) => {
+  if (!req.cookies?.[SESSION_COOKIE]) return res.json({ user: null });
+  return requireAuth(req, res, next);
+}, (req, res) => {
   res.json({ user: publicUser(req.user!) });
 });
 

@@ -8,6 +8,8 @@ export interface CheckinInput {
   method: 'camera' | 'manual';
   scannedAt: Date;
   offline: boolean;
+  /** The device admitted this ticket provisionally while offline. */
+  provisional: boolean;
 }
 
 export interface CheckinOutcome {
@@ -40,7 +42,7 @@ export async function checkIn(event: EventDoc, operator: UserDoc, input: Checkin
   if (prior) return replay(prior);
 
   const { result, ticket } = await decide(event, operator, input);
-  const conflict = input.offline && result !== 'accepted';
+  const conflict = input.provisional && result !== 'accepted';
   try {
     await Scan.create({
       scanId: input.scanId,

@@ -31,6 +31,11 @@ async function upsertUser(email: string, name: string, role: Role, password: str
 }
 
 export async function seed() {
+  if (process.env.SEED_RESET === 'true') {
+    if (process.env.NODE_ENV === 'production') throw new Error('SEED_RESET is refused in production');
+    await mongoose.connection.dropDatabase();
+    console.log(`dropped ${mongoose.connection.name}`);
+  }
   await Promise.all([User, Event, Ticket, Scan, Audit].map((m) => m.syncIndexes()));
 
   const { ADMIN_EMAIL, ADMIN_PASSWORD } = process.env;
@@ -78,10 +83,11 @@ export async function seed() {
       method: 'camera',
       scannedAt: new Date(),
       offline: false,
+      provisional: false,
     });
   }
   // One genuine duplicate attempt so the rejection analytics have something real to show.
-  await checkIn(event, operator, { scanId: randomUUID(), payload: signTicket(String(event._id), codes[0]), gate: 'Main gate', method: 'camera', scannedAt: new Date(), offline: false });
+  await checkIn(event, operator, { scanId: randomUUID(), payload: signTicket(String(event._id), codes[0]), gate: 'Main gate', method: 'camera', scannedAt: new Date(), offline: false, provisional: false });
   console.log(`demo event seeded: /e/${event.slug}`);
 }
 

@@ -211,6 +211,7 @@ eventsRouter.post('/events/:id/checkin', checkinLimiter, async (req, res) => {
       method: z.enum(['camera', 'manual']).default('camera'),
       scannedAt: z.coerce.date().optional(),
       offline: z.boolean().default(false),
+      provisional: z.boolean().default(false),
     })
     .parse(req.body);
   const now = Date.now();
